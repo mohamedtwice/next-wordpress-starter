@@ -6,8 +6,9 @@ import { getApolloClient } from 'lib/apollo-client';
 
 import styles from '../styles/Home.module.css'
 
-export default function Home({ page, posts }) {
+export default function Home({ page, posts, pages, docs, patterns }) {
   const { title, description } = page;
+  console.log(patterns)
   return (
     <div className={styles.container}>
       <Head>
@@ -21,6 +22,27 @@ export default function Home({ page, posts }) {
 
         <p className={styles.description}>{ description }</p>
 
+        <h2>Pages</h2>
+        <ul className={styles.grid}>
+          {pages && pages.length > 0 && pages.map(page => {
+            return (
+                <li key={page.slug} className={styles.card}>
+                  <Link href={page.path}>
+                    <a>
+                      <h3 dangerouslySetInnerHTML={{
+                        __html: page.title
+                      }} />
+                      <div dangerouslySetInnerHTML={{
+                        __html: page.excerpt
+                      }} />
+                    </a>
+                  </Link>
+                </li>
+            );
+          })}
+        </ul>
+
+        <h2>Posts</h2>
         <ul className={styles.grid}>
           {posts && posts.length > 0 && posts.map(post => {
             return (
@@ -72,6 +94,34 @@ export async function getStaticProps() {
             }
           }
         }
+        pages(first: 10000) {
+          edges {
+            node {
+              id
+              title
+              slug
+            }
+          }
+        }
+        docs(first: 10000) {
+          edges {
+            node {
+              id
+              title
+              slug
+            }
+          }
+        }
+        
+        patterns(first: 10000) {
+          edges {
+            node {
+              id
+              title
+              slug
+            }
+          }
+        }
       }
     `,
   });
@@ -83,6 +133,27 @@ export async function getStaticProps() {
     }
   });
 
+  const pages = data?.data.pages.edges.map(({ node }) => node).map(page => {
+    return {
+      ...page,
+      path: `/${page.slug}/`
+    }
+  });
+
+  const docs = data?.data.docs.edges.map(({ node }) => node).map(doc => {
+    return {
+      ...doc,
+      path: `/docs/${doc.slug}/`
+    }
+  });
+
+  const patterns = data?.data.patterns.edges.map(({ node }) => node).map(pattern => {
+    return {
+      ...pattern,
+      path: `/patterns/${pattern.slug}/`
+    }
+  });
+
   const page = {
     ...data?.data.generalSettings
   }
@@ -90,7 +161,10 @@ export async function getStaticProps() {
   return {
     props: {
       page,
-      posts
+      posts,
+      pages,
+      docs,
+      patterns,
     }
   }
 }
