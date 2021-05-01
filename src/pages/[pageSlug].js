@@ -7,6 +7,8 @@ import { getApolloClient } from 'lib/apollo-client';
 import styles from '../styles/Home.module.css'
 
 export default function Page({ page, site }) {
+
+
     return (
         <div className={styles.container}>
             <Head>
@@ -17,12 +19,12 @@ export default function Page({ page, site }) {
 
             <main className={styles.main}>
                 <h1 className={styles.title}>
-                    { page.title }
+                    { page?.title }
                 </h1>
 
                 <div className={styles.grid}>
                     <div className={styles.content} dangerouslySetInnerHTML={{
-                        __html: page.content
+                        __html: page?.content
                     }} />
                 </div>
 
@@ -72,7 +74,8 @@ export async function getStaticProps({ params = {} } = {}) {
         props: {
             page,
             site
-        }
+        },
+        revalidate: 1, // In seconds
     }
 }
 
