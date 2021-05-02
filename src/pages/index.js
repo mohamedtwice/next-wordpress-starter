@@ -8,7 +8,7 @@ import styles from '../styles/Home.module.css'
 
 export default function Home({ page, posts, pages, docs, patterns }) {
   const { title, description } = page;
-  console.log(patterns)
+  console.log(patterns, docs)
   return (
     <div className={styles.container}>
       <Head>
@@ -22,53 +22,107 @@ export default function Home({ page, posts, pages, docs, patterns }) {
 
         <p className={styles.description}>{ description }</p>
 
-        <h2>Pages</h2>
-        <ul className={styles.grid}>
-          {pages && pages.length > 0 && pages.map(page => {
-            return (
-                <li key={page.slug} className={styles.card}>
-                  <Link href={page.path}>
-                    <a>
-                      <h3 dangerouslySetInnerHTML={{
-                        __html: page.title
-                      }} />
-                      <div dangerouslySetInnerHTML={{
-                        __html: page.excerpt
-                      }} />
-                    </a>
-                  </Link>
-                </li>
-            );
-          })}
-        </ul>
+        <div className="flex flex-wrap overflow-hidden lg:-mx-1 xl:-mx-2">
 
-        <h2>Posts</h2>
-        <ul className={styles.grid}>
-          {posts && posts.length > 0 && posts.map(post => {
-            return (
-              <li key={post.slug} className={styles.card}>
-                <Link href={post.path}>
-                  <a>
-                    <h3 dangerouslySetInnerHTML={{
-                      __html: post.title
-                    }} />
-                    <div dangerouslySetInnerHTML={{
-                      __html: post.excerpt
-                    }} />
-                  </a>
-                </Link>
-              </li>
-            );
-          })}
+          <div className="w-full overflow-hidden sm:w-1/2 md:w-1/2 lg:my-1 lg:px-1 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
+              <div className={styles.card}>
+          <h2 className="max-w-lg w-full p-4">Pages</h2>
 
-          {!posts || posts.length === 0 && (
-            <li>
-              <p>
-                Oops, no posts found!
-              </p>
-            </li>
-          )}
-        </ul>
+              {pages && pages.length > 0 && pages.map(page => {
+                return (
+                    <div key={page.slug} className="max-w-lg w-full p-1">
+                      <Link href={page.path}>
+                      <a className="text-blue-700  inline-flex items-center font-semibold tracking-wide">
+                    <span className="hover:underline text-2xl">
+                        {page.title}
+                    </span>
+                        <span className="text-xl ml-2">&#8594;</span>
+                      </a>
+                      </Link>
+                    </div>
+                )
+              })}
+              </div>
+          </div>
+
+
+          <div className="w-full overflow-hidden sm:w-1/2 md:w-1/2 lg:my-1 lg:px-1 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
+          <h2>Posts</h2>
+            <ul className={styles.grid}>
+              {posts && posts.length > 0 && posts.map(post => {
+                return (
+                    <li key={post.slug} className={styles.card}>
+                      <Link href={post.path}>
+                        <a>
+                          <h3 dangerouslySetInnerHTML={{
+                            __html: post.title
+                          }} />
+                          <div dangerouslySetInnerHTML={{
+                            __html: post.excerpt
+                          }} />
+                        </a>
+                      </Link>
+                    </li>
+                );
+              })}
+
+              {!posts || posts.length === 0 && (
+                  <li>
+                    <p>
+                      Oops, no posts found!
+                    </p>
+                  </li>
+              )}
+            </ul>
+          </div>
+
+
+          <div className="w-full overflow-hidden sm:w-1/2 md:w-1/2 lg:my-1 lg:px-1 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
+            <div className={styles.card}>
+              <h2 className="max-w-lg w-full p-4">Docs</h2>
+
+              {docs && docs.length > 0 && docs.map(doc => {
+                return (
+                    <div key={doc.slug} className="max-w-lg w-full p-1">
+                      <Link href={doc.path}>
+                        <a className="text-blue-700  inline-flex items-center font-semibold tracking-wide">
+                    <span className="hover:underline text-2xl">
+                        {doc.title}
+                    </span>
+                          <span className="text-xl ml-2">&#8594;</span>
+                        </a>
+                      </Link>
+                    </div>
+                )
+              })}
+            </div>
+          </div>
+
+
+          <div className="w-full overflow-hidden sm:w-1/2 md:w-1/2 lg:my-1 lg:px-1 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
+            <div className={styles.card}>
+              <h2 className="max-w-lg w-full p-4">Patterns</h2>
+
+              {patterns && patterns.length > 0 && patterns.map(pattern => {
+                return (
+                    <div key={pattern.slug} className="max-w-lg w-full p-1">
+                      <Link href={pattern.path}>
+                        <a className="text-blue-700  inline-flex items-center font-semibold tracking-wide">
+                    <span className="hover:underline text-2xl">
+                        {pattern.title}
+                    </span>
+                          <span className="text-xl ml-2">&#8594;</span>
+                        </a>
+                      </Link>
+                    </div>
+                )
+              })}
+            </div>
+          </div>
+
+
+</div>
+
       </main>
     </div>
   )
