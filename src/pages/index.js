@@ -17,16 +17,39 @@ export default function Home({ page, posts, pages, docs, patterns }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      {/*<div className="w-full bg-gradient-to-br from-indigo-900 to-green-900 overflow-auto">*/}
+      {/*  <div className="container max-w-5xl mx-auto px-4">*/}
+      {/*    <div className="w-4/5">*/}
+      {/*      <h1 className="mt-32 text-white text-6xl font-bold">The fastest, most secure dev environment <br/><span*/}
+      {/*          className="text-blue-400">on the planet.</span></h1>*/}
+      {/*    </div>*/}
+      {/*    <div className="w-5/6 my-10 ml-6">*/}
+      {/*      <h3 className="text-gray-300">*/}
+      {/*        Create, edit & deploy fullstack apps with <br/>*/}
+      {/*        <strong className="text-white">faster package installations & greater security</strong>*/}
+      {/*        <br/>than even local environments.*/}
+      {/*      </h3>*/}
+      {/*    </div>*/}
+      {/*    <div className="hidden sm:block opacity-50 z-0">*/}
+      {/*      <div className="shadow-2xl w-96 h-96 rounded-full -mt-72"></div>*/}
+      {/*      <div className="shadow-2xl w-96 h-96 rounded-full -mt-96"></div>*/}
+      {/*      <div className="shadow-xl w-80 h-80 rounded-full ml-8 -mt-96"></div>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
+
       <main className={styles.main}>
         <h1 className={styles.title}>{title}</h1>
 
         <p className={styles.description}>{ description }</p>
 
+
+
         <div className="flex flex-wrap overflow-hidden lg:-mx-1 xl:-mx-2">
 
           <div className="w-full overflow-hidden sm:w-1/2 md:w-1/2 lg:my-1 lg:px-1 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
               <div className={styles.card}>
-          <h2 className="max-w-lg w-full p-4">Pages</h2>
+          <h2 className="max-w-lg w-full p-4 text-3xl">Pages</h2>
 
               {pages && pages.length > 0 && pages.map(page => {
                 return (
@@ -46,40 +69,31 @@ export default function Home({ page, posts, pages, docs, patterns }) {
           </div>
 
 
+
           <div className="w-full overflow-hidden sm:w-1/2 md:w-1/2 lg:my-1 lg:px-1 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
-          <h2>Posts</h2>
-            <ul className={styles.grid}>
+            <div className={styles.card}>
+              <h2 className="max-w-lg w-full p-4 text-3xl">Posts</h2>
               {posts && posts.length > 0 && posts.map(post => {
                 return (
-                    <li key={post.slug} className={styles.card}>
+                    <div key={post.slug} className="max-w-lg w-full p-1">
                       <Link href={post.path}>
-                        <a>
-                          <h3 dangerouslySetInnerHTML={{
-                            __html: post.title
-                          }} />
-                          <div dangerouslySetInnerHTML={{
-                            __html: post.excerpt
-                          }} />
+                        <a className="text-blue-700  inline-flex items-center font-semibold tracking-wide">
+                    <span className="hover:underline text-2xl">
+                        {post.title}
+                    </span>
+                          <span className="text-xl ml-2">&#8594;</span>
                         </a>
                       </Link>
-                    </li>
+                    </div>
                 );
               })}
-
-              {!posts || posts.length === 0 && (
-                  <li>
-                    <p>
-                      Oops, no posts found!
-                    </p>
-                  </li>
-              )}
-            </ul>
+            </div>
           </div>
 
 
           <div className="w-full overflow-hidden sm:w-1/2 md:w-1/2 lg:my-1 lg:px-1 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
             <div className={styles.card}>
-              <h2 className="max-w-lg w-full p-4">Docs</h2>
+              <h2 className="max-w-lg w-full p-4 text-3xl">Docs</h2>
 
               {docs && docs.length > 0 && docs.map(doc => {
                 return (
@@ -101,7 +115,7 @@ export default function Home({ page, posts, pages, docs, patterns }) {
 
           <div className="w-full overflow-hidden sm:w-1/2 md:w-1/2 lg:my-1 lg:px-1 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
             <div className={styles.card}>
-              <h2 className="max-w-lg w-full p-4">Patterns</h2>
+              <h2 className="max-w-lg w-full p-4 text-3xl">Patterns</h2>
 
               {patterns && patterns.length > 0 && patterns.map(pattern => {
                 return (
@@ -123,6 +137,16 @@ export default function Home({ page, posts, pages, docs, patterns }) {
 
 </div>
 
+        {/*<section className="min-h-screen flex items-center justify-center px-4 bg-white">*/}
+        {/*  <div className="max-w-lg w-full rounded-lg shadow-lg p-4">*/}
+        {/*      <a href="#" className="text-blue-700  inline-flex items-center font-semibold tracking-wide">*/}
+        {/*            <span className="hover:underline">*/}
+        {/*                Continue to link*/}
+        {/*            </span>*/}
+        {/*        <span className="text-xl ml-2">&#8594;</span>*/}
+        {/*      </a>*/}
+        {/*    </div>*/}
+        {/*</section>*/}
       </main>
     </div>
   )
